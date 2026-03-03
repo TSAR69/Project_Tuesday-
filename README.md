@@ -1,6 +1,6 @@
-# NOXR Voice Assistant
+# Tuesday Voice Assistant
 
-NOXR is a lightweight, offline CLI-based voice assistant designed for Windows. It provides hands-free control over your system, applications, and media playback using strict wake-word detection.
+Tuesday is a lightweight, offline CLI-based voice assistant designed for Windows. It provides hands-free control over your system, applications, and media playback using strict wake-word detection.
 
 ## Features
 
@@ -22,7 +22,7 @@ NOXR is a lightweight, offline CLI-based voice assistant designed for Windows. I
 1.  **Clone the repository**:
     ```bash
     git clone <repository-url>
-    cd Jarvis
+    cd Tuesday
     ```
 
 2.  **Install Dependencies**:
@@ -39,14 +39,14 @@ NOXR is a lightweight, offline CLI-based voice assistant designed for Windows. I
 
 1.  Run the main script:
     ```bash
-    python noxr/main.py
+    python tuesday/main.py
     ```
 
 2.  **Wait for initialization**:
-    - The console will show: `[NOXR Online] Say 'noxr' to wake me up.`
+    - The console will show: `[TUESDAY Online] Say 'tuesday' to wake me up.`
 
 3.  **Speak Commands**:
-    - **Wake up**: "noxr"
+    - **Wake up**: "tuesday"
     - **Commands**:
         - "Open Chrome"
         - "Set volume to 50"
@@ -56,9 +56,10 @@ NOXR is a lightweight, offline CLI-based voice assistant designed for Windows. I
 
 ## Configuration
 
-- **Wake Word**: predefined as `"noxr"` (strict match).
-- **Settings**: Modify `noxr/config.py` to add new apps or adjust defaults.
+- **Wake Word**: predefined as `"tuesday"` (strict match).
+- **Settings**: Modify `tuesday/config.py` to add new apps or adjust defaults.
 
 ## License
 
 MIT License
+
