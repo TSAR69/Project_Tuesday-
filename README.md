@@ -1,65 +1,170 @@
-# Tuesday Voice Assistant
+# 🎙️ Tuesday — Offline Voice Assistant for Windows
 
-Tuesday is a lightweight, offline CLI-based voice assistant designed for Windows. It provides hands-free control over your system, applications, and media playback using strict wake-word detection.
+> A lightweight, offline CLI-based voice assistant for Windows. Hands-free control over your system, apps, and media — powered by strict wake-word detection. No internet. No cloud. No telemetry.
 
-## Features
+---
 
-- **Wake Word detection**: Listens efficiently for "noxr" to activate.
-- **Offline Speech Recognition**: Powered by **Vosk** for privacy and speed.
-- **System Control**: Manage volume, brightness, and power options (shutdown, restart, sleep).
-- **App Launching**: Open common applications (Chrome, VS Code, Calculator, etc.) by voice.
-- **Media Control**: Play, pause, skip tracks, and control volume.
-- **Utilities**: Check the time, date, or hear a joke.
+## ✨ Features
 
-## Requirements
+| Feature | Details |
+|---|---|
+| 🎤 Wake Word Detection | Listens for `"tuesday"` — strict match, no false triggers |
+| 🧠 Offline Speech Recognition | Powered by Vosk — fully local, no API calls |
+| 🖥️ System Control | Volume, brightness, shutdown, restart, sleep |
+| 🚀 App Launching | Open Chrome, VS Code, Calculator, and more by voice |
+| 🎵 Media Playback | Play, pause, skip tracks, control volume |
+| 🕐 Utilities | Get the time, date, or hear a joke |
 
-- **OS**: Windows
-- **Python**: 3.11+
-- **Microphone**: Standard input device.
+---
 
-## Installation
+## 🖥️ Requirements
 
-1.  **Clone the repository**:
-    ```bash
-    git clone <repository-url>
-    cd Tuesday
-    ```
+- **OS:** Windows 10 / 11
+- **Python:** 3.11+
+- **Microphone:** Any standard input device
 
-2.  **Install Dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-    *(Ensure `vosk`, `pyttsx3`, `pyaudio`, and other dependencies are listed in requirements.txt)*
+---
 
-3.  **Download Vosk Model**:
-    - Download a small English model from [Vosk Models](https://alphacephei.com/vosk/models).
-    - Extract it to `d:\Jarvis\jarvis\models\` (or update the path in `speech_to_text.py`).
+## 📦 Installation
 
-## Usage
+### 1. Clone the Repository
 
-1.  Run the main script:
-    ```bash
-    python tuesday/main.py
-    ```
+```bash
+git clone https://github.com/TSAR69/Project_Tuesday-.git
+cd Project_Tuesday-
+```
 
-2.  **Wait for initialization**:
-    - The console will show: `[TUESDAY Online] Say 'tuesday' to wake me up.`
+### 2. Install Dependencies
 
-3.  **Speak Commands**:
-    - **Wake up**: "tuesday"
-    - **Commands**:
-        - "Open Chrome"
-        - "Set volume to 50"
-        - "What time is it?"
-        - "Play music"
-        - "Go to sleep" (Returns to low-power listening mode)
+```bash
+pip install -r requirements.txt
+```
 
-## Configuration
+> Core dependencies include `vosk`, `pyaudio`, `pynput`, and others listed in `requirements.txt`
 
-- **Wake Word**: predefined as `"tuesday"` (strict match).
-- **Settings**: Modify `tuesday/config.py` to add new apps or adjust defaults.
+**If `pyaudio` fails on install:**
+```bash
+pip install pipwin
+pipwin install pyaudio
+```
 
-## License
+### 3. Download the Vosk Model
 
-MIT License
+1. Go to [https://alphacephei.com/vosk/models](https://alphacephei.com/vosk/models)
+2. Download a **small English model** (e.g. `vosk-model-small-en-us-0.15`)
+3. Extract it and update the model path inside `speech_to_text.py`
 
+```python
+# In speech_to_text.py — update this line to match your path:
+model = Model("path/to/your/vosk-model-folder")
+```
+
+### 4. (Optional) Run Setup
+
+```bash
+python setup.py
+```
+
+---
+
+## 🚀 Usage
+
+### Start Tuesday
+
+```bash
+python main.py
+```
+
+You'll see:
+```
+[TUESDAY Online] Say 'tuesday' to wake me up.
+```
+
+### How to Use
+
+1. Say **"tuesday"** — this activates the assistant
+2. Wait for the confirmation tone / prompt
+3. Speak your command
+
+### Example Commands
+
+```
+"Open Chrome"         → Launches Google Chrome
+"Set volume to 50"    → Sets system volume to 50%
+"What time is it"     → Reads out the current time
+"Play music"          → Starts media playback
+"Shutdown"            → Initiates system shutdown
+"Go to sleep"         → Returns to low-power listening mode
+```
+
+---
+
+## 📁 Project Structure
+
+```
+Project_Tuesday-/
+├── main.py              # Entry point — run this to start Tuesday
+├── app.py               # Core app logic and command routing
+├── speech_to_text.py    # Vosk-based offline speech recognition
+├── system.py            # System control (volume, brightness, power)
+├── config.py            # Wake word config and app settings
+├── fa.py                # Feature/action handlers
+├── setup.py             # First-time setup helper
+├── __init__.py
+├── test_open.py         # App launch tests
+├── test_libary.py       # Library/dependency tests
+├── test_to_speech.py    # Speech recognition tests
+└── requirements.txt
+```
+
+---
+
+## ⚙️ Configuration
+
+Edit `config.py` to customize:
+
+- **Wake word** — default is `"tuesday"` (strict match)
+- **Registered apps** — add new apps Tuesday can open
+- **Default behaviors** — adjust volume steps, default apps, etc.
+
+---
+
+## 🛠️ Troubleshooting
+
+**Microphone not detected**
+- Set your mic as the default recording device in Windows Sound Settings
+- Test with: `python test_to_speech.py`
+
+**Vosk model not found / crashes on start**
+- Verify the model path in `speech_to_text.py` is correct
+- The model folder should contain `am/`, `conf/`, and `graph/` subdirectories
+
+**Wake word never triggers**
+- Speak clearly at a normal pace
+- Check mic input levels in Windows — should be at 70%+
+- Run `python test_libary.py` to verify all dependencies loaded correctly
+
+**App won't open via voice**
+- Make sure the app is registered in `config.py`
+- Run `python test_open.py` to debug app launch issues
+
+**`pip install` errors**
+- Run terminal as Administrator
+- Confirm Python version: `python --version` (needs 3.11+)
+
+---
+
+## 📬 Contact & Issues
+
+Found a bug? Something's broken? Want to suggest a feature?
+
+- **Open an issue:** [github.com/TSAR69/Project_Tuesday-/issues](https://github.com/TSAR69/Project_Tuesday-/issues) ← best way to reach me
+- **GitHub Profile:** [@TSAR69](https://github.com/TSAR69)
+
+PRs are welcome. If it helped you, drop a ⭐
+
+---
+
+## 📄 License
+
+MIT License — free to use, modify, and distribute.
